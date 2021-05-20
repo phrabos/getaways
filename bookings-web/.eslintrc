@@ -32,7 +32,7 @@
     "space-before-function-paren": [
       "error",
       {
-        "async-arrow": "always",
+        "asyncArrow": "always",
         "anonymous": "never",
         "named": "never"
       }
