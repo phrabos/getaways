@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPlaces } from '../services/placesApi';
 import PlaceList from '../components/places/PlaceList';
+import Login from './Login';
 
 const Getaways = () => {
   const [places, setPlaces] = useState([]);
@@ -15,7 +16,13 @@ const Getaways = () => {
   }, []);
 
   if(loading) return <h1>Loading...</h1>;
-  return <PlaceList places={places} />;
+  return (
+    <>
+    
+      <Login />
+      <PlaceList places={places} />
+    </>
+  );
 };
 
 export default Getaways;
