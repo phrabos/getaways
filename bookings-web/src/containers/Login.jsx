@@ -12,8 +12,9 @@ const Login = ({ history }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     // userLogin('test@test.com', '1234');
-    await userLogin(usernameInput, passwordInput);
-    history.push('/places');
+    const { status, message } = await userLogin(usernameInput, passwordInput);
+    if(!status.toString().startsWith('2')) return alert(message);
+    else history.push('/places');
   };
 
   const handleNameChange = (e) => {
