@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 
 const PlaceList = ({ places }) => {
-  return places.map((place) => <Place key={place.id} {...place} />);
+  return (
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+
+    }}>
+      {places.map((place) => <Place key={place.id} {...place} />)}
+    </div>
+  );
 };
 
 PlaceList.propTypes = {

@@ -13,7 +13,6 @@ const Register = ({ history }) => {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     const { status, message } = await userRegister(emailInput, usernameInput, passwordInput);
-    console.log('from submit', status, message);
     if(!status.toString().startsWith('2')) return alert(message);
     else history.push('/login');
   };
