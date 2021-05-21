@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import LoginControls from '../components/register-login/LoginControls';
 import { userLogin } from '../services/loginRegisterApi';
+
 
 const Login = ({ history }) => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-  // const history = useHistory();
+
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // userLogin('test@test.com', '1234');
     const { status, message } = await userLogin(usernameInput, passwordInput);
     if(!status.toString().startsWith('2')) return alert(message);
     else history.push('/places');

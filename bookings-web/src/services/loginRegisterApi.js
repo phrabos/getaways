@@ -22,5 +22,6 @@ export const userRegister = async (email, username, password) => {
   });
   const json = await res.json();
   console.log(json);
+  return json.status ? json : { status: 200 };
 
 };
