@@ -9,11 +9,16 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 450,
     margin: '2px',
+    textDecoration: 'none',
+  },
+  cardLink: {
+    textDecoration: 'none',
   },
   media: {
     height: 0,
@@ -33,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Place = ({
+  id,
   name,
   description,
   location,
@@ -48,7 +54,7 @@ const Place = ({
 
   return (
     <>
-      <Card className={classes.root}>
+      <Card component={Link} to={`/places/${id}`} className={classes.root}>
         <CardHeader 
           title={name}
           subheader={pool ? 'Has a Pool!' : ' .'}
@@ -101,16 +107,17 @@ const Place = ({
 };
 
 Place.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   pricePerNight: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  imageThumbnail: PropTypes.string.isRequired,
+  // imageThumbnail: PropTypes.string.isRequired,
   maxGuests: PropTypes.number.isRequired,
-  petFriendly: PropTypes.bool.isRequired,
+  // petFriendly: PropTypes.bool.isRequired,
   pool: PropTypes.bool.isRequired,
-  wifi: PropTypes.bool.isRequired,
+  // wifi: PropTypes.bool.isRequired,
 };
 
 export default Place;

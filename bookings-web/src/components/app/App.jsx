@@ -1,5 +1,6 @@
 import React from 'react';
 import Getaways from '../../containers/Getaways';
+import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import {
@@ -31,6 +32,12 @@ export default function App() {
             path="/places"
             exact
             render={(routerProps) => <Getaways {...routerProps} />}
+          >
+          </Route>
+          <Route
+            path="/places/:id"
+            exact
+            render={(routerProps) => <GetawaysDetail {...routerProps} />}
           >
           </Route>
         </Switch>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPlaces } from '../services/placesApi';
 import PlaceList from '../components/places/PlaceList';
+import { Button } from '@material-ui/core';
 
 const Getaways = () => {
   const [places, setPlaces] = useState([]);
@@ -16,10 +17,17 @@ const Getaways = () => {
 
   if(loading) return <h1>Loading...</h1>;
   return (
-
- 
-    <PlaceList places={places} />
-
+    <>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <Button variant="contained" color="secondary" style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}>Prev</Button>
+        <Button variant="contained" color="secondary" style={{ display: 'inline', marginTop: '5px' }}>Next</Button>
+      </div>
+      <PlaceList places={places} />
+    </>
   );
 };
 
