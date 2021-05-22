@@ -24,3 +24,12 @@ export const userRegister = async (email, username, password) => {
   return json.status ? json : { status: 200 };
 
 };
+
+export const logUserOut = async () => {
+  const res = await fetch(`${process.env.BASE_URL}/users/logout`, { 
+    credentials: 'include'
+  });
+  const json = await res.json();
+  return json;
+};
+

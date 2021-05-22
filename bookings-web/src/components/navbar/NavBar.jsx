@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 // import Menu from '@material-ui/core/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { Container, List } from '@material-ui/core';
+import { logUserOut } from '../../services/loginRegisterApi';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ const NavBar = () => {
             <Link to={'/places'}><List style={{ marginRight: '20px' }}>Getaways</List></Link> 
             <List style={{ marginRight: '20px' }}>Profile</List>
             <Link to={'/login'}><List style={{ marginRight: '20px' }}>Login</List></Link> 
-            <List onClick={async () => logUserOut()} style={{ marginRight: '20px' }}>Logout</List>
+            <Link to={'/login'}><List onClick={async () => logUserOut()} style={{ marginRight: '20px' }}>Logout</List></Link>
           </Container>
         </Toolbar>
       </AppBar>
