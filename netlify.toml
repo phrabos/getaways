@@ -1,4 +1,4 @@
 [build]
   base = "bookings-web"
   publish = "src"
-  command = "npm run webpack --devtool source-map"
+  command = "npx webpack --devtool source-map"
