@@ -1,4 +1,0 @@
-[build]
-  base    = "bookings-web"
-  publish = "bookings-web/src"
-  command = "webpack --devtool source-map"
