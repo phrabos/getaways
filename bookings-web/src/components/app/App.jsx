@@ -17,7 +17,7 @@ export default function App() {
         <NavBar />
         <Switch>
           <Route
-            path="/login"
+            path="/"
             exact
             render={(routerProps) => <Login {...routerProps} />}
           >

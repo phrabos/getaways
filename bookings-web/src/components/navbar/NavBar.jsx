@@ -28,7 +28,7 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <Link to={'/login'}>
+          <Link to={'/'}>
             <HomeIcon className={classes.homebtn} size="large"/>
           </Link>
           <Container style={{
