@@ -1,0 +1,3 @@
+[build]
+  base    = "bookings-web"
+  publish = "bookings-web"
