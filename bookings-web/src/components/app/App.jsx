@@ -7,11 +7,13 @@ import {
   Route, 
   Switch,
 } from 'react-router-dom';
+import NavBar from '../navbar/NavBar';
 
 export default function App() {
   return (
     <>
       <Router>
+        <NavBar />
         <Switch>
           <Route
             path="/login"

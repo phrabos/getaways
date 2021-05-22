@@ -54,7 +54,7 @@ const LoginControls = ({
         />
         <br />
         <br />
-        <Button variant="contained" color="primary">Submit</Button>
+        <Button component="button" onClick={handleLoginSubmit} variant="contained" color="primary">Submit</Button>
       </form>
     </>
   );

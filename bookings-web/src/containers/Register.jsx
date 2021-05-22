@@ -39,7 +39,6 @@ const Register = ({ history }) => {
       handlePasswordChange={handlePasswordChange}
       handleEmailChange={handleEmailChange}
     />
-  
   );
 };
 

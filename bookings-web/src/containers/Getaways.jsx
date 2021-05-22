@@ -17,8 +17,9 @@ const Getaways = () => {
   if(loading) return <h1>Loading...</h1>;
   return (
 
+ 
     <PlaceList places={places} />
-  
+
   );
 };
 

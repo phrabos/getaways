@@ -27,6 +27,7 @@ const Login = ({ history }) => {
 
 
   return (
+
     <LoginControls 
       usernameInput={usernameInput}
       passwordInput={passwordInput}
@@ -34,6 +35,7 @@ const Login = ({ history }) => {
       handleNameChange={handleNameChange}
       handlePasswordChange={handlePasswordChange}
     />
+
   
   );
 };
