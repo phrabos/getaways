@@ -7,7 +7,7 @@ export const userLogin = async (email, password) => {
   });
   const json = await res.json();
   
-  return json.status ? json : { status: 200 };
+  return json;
 };
 
 export const userRegister = async (email, username, password) => {

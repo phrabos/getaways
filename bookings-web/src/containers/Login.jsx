@@ -12,7 +12,7 @@ const Login = ({ history }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const { status, message } = await userLogin(usernameInput, passwordInput);
-    if(!status.toString().startsWith('2')) return alert(message);
+    if(status) return alert(message);
     else history.push('/places');
   };
 
