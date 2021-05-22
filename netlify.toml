@@ -1,3 +1,4 @@
 [build]
   base = "bookings-web"
+  publish = "bookings-web/build"
   command = "npm run build"
