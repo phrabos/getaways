@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,11 +21,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = ({ userToken, handleLogout }) => {
 
   const classes = useStyles();
-
-  return (
+  if(userToken) return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
@@ -37,13 +37,38 @@ const NavBar = () => {
           }}>
             <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/places'}><List style={{ marginRight: '20px' }}>Getaways</List></Link> 
             <List style={{ marginRight: '20px' }}>Profile</List>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/login'}><List style={{ marginRight: '20px' }}>Login</List></Link> 
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/login'}><List onClick={async () => logUserOut()} style={{ marginRight: '20px' }}>Logout</List></Link>
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/'}><List onClick={async () => {
+              handleLogout();
+              logUserOut();}
+            } style={{ marginRight: '20px' }}>Logout</List></Link>
           </Container>
         </Toolbar>
       </AppBar>
     </div>
   );
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Link to={'/'}>
+            <HomeIcon className={classes.homebtn} size="large"/>
+          </Link>
+          <Container style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}>
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/places'}><List style={{ marginRight: '20px' }}>Getaways</List></Link> 
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/'}><List style={{ marginRight: '20px' }}>Login</List></Link> 
+          </Container>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
+
+NavBar.propTypes = {
+  userToken: PropTypes.string,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default NavBar;

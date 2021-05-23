@@ -24,7 +24,7 @@ const LoginControls = ({
         <TextField
           required
           variant="filled"  
-          label="username"
+          label="email"
           onChange={handleNameChange} 
           value={usernameInput}
           InputProps={{

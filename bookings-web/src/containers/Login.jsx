@@ -4,16 +4,17 @@ import LoginControls from '../components/register-login/LoginControls';
 import { userLogin } from '../services/loginRegisterApi';
 
 
-const Login = ({ history }) => {
+const Login = ({ history, userToken, handleLogin }) => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
-
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const { status, message } = await userLogin(usernameInput, passwordInput);
+    const { status, message, token } = await userLogin(usernameInput, passwordInput);
     if(status) return alert(message);
     else history.push('/places');
+    handleLogin(token);
+    localStorage.setItem('TOKEN', token);
   };
 
   const handleNameChange = (e) => {
@@ -24,7 +25,7 @@ const Login = ({ history }) => {
     setPasswordInput(e.target.value);
   };
 
-
+  console.log('user is logged in:', !!userToken);
 
   return (
 
@@ -41,6 +42,8 @@ const Login = ({ history }) => {
 };
 
 Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+  userToken: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired

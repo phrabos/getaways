@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Getaways from '../../containers/Getaways';
 import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
@@ -11,15 +11,28 @@ import {
 import NavBar from '../navbar/NavBar';
 
 export default function App() {
+  const [userToken, setUserToken] = useState(localStorage.getItem('TOKEN'));
+
+  const handleLogin = (token) => {
+    setUserToken(token);
+  };
+
+  const handleLogout = () => {
+    setUserToken('');
+  };
+
   return (
     <>
       <Router>
-        <NavBar />
+        <NavBar userToken={userToken} handleLogout={handleLogout}/>
         <Switch>
           <Route
             path="/"
             exact
-            render={(routerProps) => <Login {...routerProps} />}
+            render={(routerProps) => <Login 
+              handleLogin={handleLogin}
+              userToken={userToken}
+              {...routerProps} />}
           >
           </Route>
           <Route

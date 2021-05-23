@@ -3,10 +3,10 @@ export const userLogin = async (email, password) => {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type':'application/jSON' },
-    body: JSON.stringify({ email: `${email}`, password: `${password}` })
+    body: JSON.stringify({ email, password })
   });
   const json = await res.json();
-  
+  console.log(json);
   return json;
 };
 
@@ -30,6 +30,7 @@ export const logUserOut = async () => {
     credentials: 'include'
   });
   const json = await res.json();
+  localStorage.removeItem('TOKEN');
   return json;
 };
 
