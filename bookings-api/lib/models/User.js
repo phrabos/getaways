@@ -33,7 +33,7 @@ const schema = new mongoose.Schema(
 );
 
 schema.statics.authorize = async function ({ email, password }) {
-  // if(!emai) throw new Error('Email Required')
+  if(!email) throw new Error('Email Required')
 
   
   // check that user exists

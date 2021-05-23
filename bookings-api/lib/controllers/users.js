@@ -25,7 +25,7 @@ module.exports = Router()
     }
   })
   .post('/login', async (req, res, next) => {
-    if(!req.body.email)res.send('Email Required')
+    // if(!req.body.email)res.send('Email Required')
     try {
       const { token, user } = await User.authorize(req.body);
 

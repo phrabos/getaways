@@ -39,6 +39,7 @@ const Login = ({ history, userToken, handleLogin }) => {
       justifyContent: 'center',
       alignItems: 'center',
     }}>
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
       <Typography>Welcome to Ruby's Pet Friendly Getaways</Typography>
       <img style={{ width: '200px' }} src="https://radar.llc/images/dog.png" alt="dog"/>
       <LoginControls 
