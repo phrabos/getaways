@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LoginControls from '../components/register-login/LoginControls';
 import { userLogin } from '../services/loginRegisterApi';
@@ -7,6 +7,11 @@ import { userLogin } from '../services/loginRegisterApi';
 const Login = ({ history, userToken, handleLogin }) => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+
+  useEffect(() => {
+    console.log('user is logged in:', !!userToken);
+    
+  }, []);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +30,6 @@ const Login = ({ history, userToken, handleLogin }) => {
     setPasswordInput(e.target.value);
   };
 
-  console.log('user is logged in:', !!userToken);
 
   return (
 

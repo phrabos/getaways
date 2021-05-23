@@ -19,6 +19,11 @@ const useStyles = makeStyles(() => ({
   homebtn: {
     color: 'white',
   },
+  linkbtn: {
+    textDecoration: 'none',
+    color: 'inherit',
+    marginRight: '20px',
+  }
 }));
 
 const NavBar = ({ userToken, handleLogout }) => {
@@ -35,12 +40,18 @@ const NavBar = ({ userToken, handleLogout }) => {
             display: 'flex',
             justifyContent: 'flex-end',
           }}>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/places'}><List style={{ marginRight: '20px' }}>Getaways</List></Link> 
-            <List style={{ marginRight: '20px' }}>Profile</List>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/'}><List onClick={async () => {
-              handleLogout();
-              logUserOut();}
-            } style={{ marginRight: '20px' }}>Logout</List></Link>
+            <List className={classes.linkbtn} component={Link} to={'/places'}>Getaways</List>
+            <List component={Link} to="/profile" className={classes.linkbtn}>Profile</List>
+            <List
+              className={classes.linkbtn}
+              component={Link}
+              to={'/'} 
+              onClick={async () => {
+                handleLogout();
+                logUserOut();}
+              }
+            >Logout
+            </List>
           </Container>
         </Toolbar>
       </AppBar>

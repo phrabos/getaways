@@ -17,7 +17,11 @@ const GetawaysDetail = ({ match }) => {
 
   if(loading) return <h1>Loading...</h1>;
   return (
-    <>
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center'
+    }}>
       <Place
         id={place.id} 
         name={place.name}
@@ -28,7 +32,7 @@ const GetawaysDetail = ({ match }) => {
         maxGuests={place.maxGuests}
         pool={place.pool}
       />
-    </>
+    </div>
   );
 };
 
