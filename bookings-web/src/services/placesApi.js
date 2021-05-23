@@ -11,6 +11,7 @@ export const getPlaces = async () => {
         ...place
       }) => ({
         ...place,
+        image: 'https://loremflickr.com/400/600',
         pricePerNight: price_per_night,
         imageThumbnail: image_thumbnail,
         maxGuests: max_guests,

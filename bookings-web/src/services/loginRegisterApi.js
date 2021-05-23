@@ -34,8 +34,8 @@ export const logUserOut = async () => {
   return json;
 };
 
-export const userUpdate = async (oldEmail, newEmail, password, username) => {
-  const res = await fetch(`${process.env.BASE_URL}/users/`, { 
+export const userUpdate = async (id, oldEmail, newEmail, password, username) => {
+  const res = await fetch(`${process.env.BASE_URL}/users/${id}`, { 
     credentials: 'include',
     method: 'PUT',
     headers: { 'Content-Type':'application/jSON' },
