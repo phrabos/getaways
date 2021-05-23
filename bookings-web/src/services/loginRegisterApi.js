@@ -34,3 +34,20 @@ export const logUserOut = async () => {
   return json;
 };
 
+export const userUpdate = async (oldEmail, newEmail, password, username) => {
+  const res = await fetch(`${process.env.BASE_URL}/users/`, { 
+    credentials: 'include',
+    method: 'PUT',
+    headers: { 'Content-Type':'application/jSON' },
+    body: JSON.stringify({ 
+      oldEmail,
+      newEmail,
+      password,
+      username, 
+    })
+  });
+  const json = await res.json();
+  localStorage.removeItem('TOKEN');
+  return json;
+};
+

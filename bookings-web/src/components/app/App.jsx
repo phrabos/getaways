@@ -3,6 +3,7 @@ import Getaways from '../../containers/Getaways';
 import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
+import Profile from '../../containers/Profile';
 import {
   BrowserRouter as Router, 
   Route, 
@@ -39,6 +40,12 @@ export default function App() {
             path="/register"
             exact
             render={(routerProps) => <Register {...routerProps} />}
+          >
+          </Route> 
+          <Route
+            path="/profile"
+            exact
+            render={(routerProps) => <Profile {...routerProps} />}
           >
           </Route>          
           <Route
