@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import LoginControls from '../components/register-login/LoginControls';
 import { userLogin } from '../services/loginRegisterApi';
+import { Typography } from '@material-ui/core';
 
 
 const Login = ({ history, userToken, handleLogin }) => {
@@ -32,15 +33,22 @@ const Login = ({ history, userToken, handleLogin }) => {
 
 
   return (
-
-    <LoginControls 
-      usernameInput={usernameInput}
-      passwordInput={passwordInput}
-      handleLoginSubmit={handleLoginSubmit}
-      handleNameChange={handleNameChange}
-      handlePasswordChange={handlePasswordChange}
-    />
-
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <Typography>Welcome to Ruby's Pet Friendly Getaways</Typography>
+      <img style={{ width: '200px' }} src="https://radar.llc/images/dog.png" alt="dog"/>
+      <LoginControls 
+        usernameInput={usernameInput}
+        passwordInput={passwordInput}
+        handleLoginSubmit={handleLoginSubmit}
+        handleNameChange={handleNameChange}
+        handlePasswordChange={handlePasswordChange}
+      />
+    </div>
   
   );
 };
