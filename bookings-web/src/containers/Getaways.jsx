@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPlaces } from '../services/placesApi';
 import PlaceList from '../components/places/PlaceList';
-import { Button } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
 
 const Getaways = () => {
   const [places, setPlaces] = useState([]);
@@ -31,22 +31,43 @@ const Getaways = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <Button
-          onClick={handlePrevPage} 
-          variant="contained" 
-          color="secondary" 
-          style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
-        >
+        
+        <Container
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Container
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Button
+              onClick={handlePrevPage} 
+              variant="contained" 
+              color="secondary" 
+              style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
+            >
           Prev
-        </Button>
-        <Button
-          onClick={handleNextPage}  
-          variant="contained" 
-          color="secondary" 
-          style={{ display: 'inline', marginTop: '5px' }}
-        >
+            </Button>
+            <Button
+              onClick={handleNextPage}  
+              variant="contained" 
+              color="secondary" 
+              style={{ display: 'inline', marginTop: '5px' }}
+            >
           Next
-        </Button>
+            </Button>
+          </Container>
+          <Typography 
+            variant="body2"
+            style={{ display:'block' }} 
+          >  Page {page} / {Math.ceil(places.length / 24)}
+          </Typography>
+        </Container>
       </div>
       <PlaceList places={places} page={page} />
     </>
