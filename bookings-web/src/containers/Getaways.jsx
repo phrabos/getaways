@@ -45,22 +45,36 @@ const Getaways = () => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Button
+            {page > 1 && <Button
               onClick={handlePrevPage} 
               variant="contained" 
               color="secondary" 
               style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
+            >Prev</Button>}
+            {page === 1 && <Button
+              onClick={handlePrevPage} 
+              variant="disabled" 
+              // color="secondary" 
+              style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
             >
-          Prev
-            </Button>
-            <Button
+        Prev
+            </Button>}
+            {page < Math.ceil(places.length / 24) && <Button
               onClick={handleNextPage}  
               variant="contained" 
               color="secondary" 
               style={{ display: 'inline', marginTop: '5px' }}
             >
           Next
-            </Button>
+            </Button>}
+            {page === Math.ceil(places.length / 24) && <Button
+              onClick={handleNextPage}  
+              variant="disabled" 
+              color="secondary" 
+              style={{ display: 'inline', marginTop: '5px' }}
+            >
+          Next
+            </Button>}
           </Container>
           <Typography 
             variant="body2"
