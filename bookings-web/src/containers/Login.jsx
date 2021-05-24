@@ -17,11 +17,11 @@ const Login = ({ history, userToken, handleLogin }) => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const { status, message, token, user } = await userLogin(usernameInput, passwordInput);
+    const { status, message, user } = await userLogin(usernameInput, passwordInput);
     if(status) return alert(message);
     else history.push('/places');
-    handleLogin(token);
-    localStorage.setItem('TOKEN', token);
+    handleLogin(user.username);
+    // localStorage.setItem('TOKEN', token);
     localStorage.setItem('USER', user.username);
   };
 

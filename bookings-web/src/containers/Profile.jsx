@@ -4,23 +4,25 @@ import ProfileControls from '../components/profile/ProfileControls';
 import { userUpdate } from '../services/loginRegisterApi';
 
 
-const Profile = ({ userToken }) => {
+const Profile = ({ userToken, handleLogin }) => {
   const [oldEmailInput, setOldEmailInput] = useState('');
   const [newEmailInput, setNewEmailInput] = useState('');
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
   useEffect(() => {
-    console.log('from Profile, user is logged in:', !!userToken);
+    console.log('from Profile, user is logged in:', userToken);
     
   }, []);
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    const { status, message } = await userUpdate(oldEmailInput, newEmailInput, passwordInput, usernameInput);
+    const { status, message, user } = await userUpdate(oldEmailInput, newEmailInput, passwordInput, usernameInput);
     // alert(status, message);
     if(status) alert(message);
     else alert('profile updated');
+    handleLogin(user.username);
+    localStorage.setItem('USER', user.username);
 
   };
 
@@ -70,6 +72,7 @@ const Profile = ({ userToken }) => {
 
 Profile.propTypes = {
   userToken: PropTypes.string,
+  handleLogin: PropTypes.func.isRequired,
   // history: PropTypes.shape({
   //   push: PropTypes.func.isRequired,
   // }).isRequired

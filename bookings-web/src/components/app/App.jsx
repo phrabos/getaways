@@ -13,21 +13,26 @@ import {
 import NavBar from '../navbar/NavBar';
 
 export default function App() {
-  const [userToken, setUserToken] = useState(localStorage.getItem('TOKEN'));
-  console.log('from App, is user logged in', !!userToken);
+  const [username, setUsername] = useState(localStorage.getItem('USER'));
+  console.log('from App, is user logged in', username);
 
-  const handleLogin = (token) => {
-    setUserToken(token);
+  // useEffect(() => {
+  //   setUsername(localStorage.getItem('USER'));
+
+  // }, []);
+
+  const handleLogin = (user) => {
+    setUsername(user);
   };
 
   const handleLogout = () => {
-    setUserToken('');
+    setUsername('');
   };
 
   return (
     <>
       <Router>
-        <NavBar userToken={userToken} handleLogout={handleLogout}/>
+        <NavBar userToken={username} handleLogout={handleLogout}/>
         <Switch>
           <Route
             path="/"
@@ -40,7 +45,7 @@ export default function App() {
             exact
             render={(routerProps) => <Login 
               handleLogin={handleLogin}
-              userToken={userToken}
+              userToken={username}
               {...routerProps} />}
           >
           </Route>
@@ -56,7 +61,8 @@ export default function App() {
             path="/profile"
             exact
             render={(routerProps) => <Profile
-              userToken={userToken} 
+              userToken={username}
+              handleLogin={handleLogin} 
               {...routerProps} />}
           >
           </Route>          

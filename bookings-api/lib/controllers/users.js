@@ -12,29 +12,31 @@ module.exports = Router()
     res.json(users);
   })
   .put('/update', verifyToken, async (req, res, next) => {
-    const { username } = await User.findOne({ email: req.body.oldEmail })
+    const { username } = req.user
     console.log(username)
     console.log(req.body)
     const email = req.body.oldEmail
     const newEmail = req.body.newEmail || email
     const newUsername = req.body.newUsername || username
 
-    const user = await User.updateOne({ email }, { email: newEmail, username: newUsername })
+    await User.findOneAndUpdate({ email }, { email: newEmail, username: newUsername })
+    const user = await User.findOne({ email });
+    console.log('user', user);
 
-    // const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
-    //   expiresIn: '24h',
-    // });
+    const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+      expiresIn: '24h',
+    });
 
-    // res.cookie('session2', token, {
-    //   // domain: '.app.localhost',
-    //   httpOnly: true,
-    //   maxAge: ONE_DAY_IN_MS,
-    //   // sameSite: 'Lax' | 'None' | 'Strict',
-    //   sameSite: 'None',
-    //   secure: true
-    // });
+    res.cookie('session', token, {
+      // domain: '.app.localhost',
+      httpOnly: true,
+      maxAge: ONE_DAY_IN_MS,
+      // sameSite: 'Lax' | 'None' | 'Strict',
+      sameSite: 'None',
+      secure: true
+    });
 
-    res.json(user)
+    res.json({ user, token })
   })  
   .post('/create', async (req, res, next) => {
     const password = bcrypt.hashSync(req.body.password, 10);
@@ -54,6 +56,7 @@ module.exports = Router()
     // if(!req.body.email)res.send('Email Required')
     try {
       const { token, user } = await User.authorize(req.body);
+      const loginSuccess = {loggedIn: true}
 
       res.cookie('session', token, {
         // domain: '.app.localhost',
