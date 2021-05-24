@@ -14,6 +14,7 @@ import NavBar from '../navbar/NavBar';
 
 export default function App() {
   const [userToken, setUserToken] = useState(localStorage.getItem('TOKEN'));
+  console.log('from App, is user logged in', !!userToken);
 
   const handleLogin = (token) => {
     setUserToken(token);
@@ -54,7 +55,9 @@ export default function App() {
           <Route
             path="/profile"
             exact
-            render={(routerProps) => <Profile {...routerProps} />}
+            render={(routerProps) => <Profile
+              userToken={userToken} 
+              {...routerProps} />}
           >
           </Route>          
           <Route

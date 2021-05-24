@@ -6,7 +6,6 @@ export const userLogin = async (email, password) => {
     body: JSON.stringify({ email, password })
   });
   const json = await res.json();
-  console.log(json);
   return json;
 };
 
@@ -34,8 +33,8 @@ export const logUserOut = async () => {
   return json;
 };
 
-export const userUpdate = async (id, oldEmail, newEmail, password, username) => {
-  const res = await fetch(`${process.env.BASE_URL}/users/${id}`, { 
+export const userUpdate = async (oldEmail, newEmail, password, newUsername) => {
+  const res = await fetch(`${process.env.BASE_URL}/users/update`, { 
     credentials: 'include',
     method: 'PUT',
     headers: { 'Content-Type':'application/jSON' },
@@ -43,11 +42,12 @@ export const userUpdate = async (id, oldEmail, newEmail, password, username) => 
       oldEmail,
       newEmail,
       password,
-      username, 
+      newUsername, 
     })
   });
   const json = await res.json();
-  localStorage.removeItem('TOKEN');
+  console.log(json);
+  localStorage.setItem('TOKEN', json.token);
   return json;
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import AccountBox from '@material-ui/icons/AccountBox';
-import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
+// import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -13,12 +13,12 @@ const ProfileControls = ({
   oldEmailInput,
   newEmailInput,
   usernameInput,
-  passwordInput, 
+  // passwordInput, 
   handleUpdateSubmit, 
   handleNameChange,
   handleOldEmailChange,
   handleNewEmailChange, 
-  handlePasswordChange
+  // handlePasswordChange
 }) => {
 
   return (
@@ -42,7 +42,6 @@ const ProfileControls = ({
         <br />
         <br />
         <TextField
-          required
           variant="filled"  
           label="new email"
           onChange={handleNewEmailChange} 
@@ -70,7 +69,7 @@ const ProfileControls = ({
             ),
           }}  
         />
-        <br />
+        {/* <br />
         <br />
         <TextField
           required
@@ -86,7 +85,7 @@ const ProfileControls = ({
               </InputAdornment>
             ),
           }} 
-        />
+        /> */}
         <br />
         <br />
         <Button component="button" onClick={handleUpdateSubmit} variant="contained" color="primary">Submit</Button>

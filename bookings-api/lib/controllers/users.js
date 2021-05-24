@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Router } = require('express');
 const User = require('../models/User');
+const verifyToken = require('../utils/verify-token');
 
 const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
@@ -9,6 +10,31 @@ module.exports = Router()
   .get('/all', async (req, res, next) => {
     const users = await User.find({}).exec();
     res.json(users);
+  })
+  .put('/update', verifyToken, async (req, res, next) => {
+    const { username } = req.user
+    console.log(req.user)
+    console.log(req.body)
+    const email = req.body.oldEmail
+    const newEmail = req.body.newEmail || email
+    const newUsername = req.body.newUsername || username
+
+    const user = await User.updateOne({ email }, { email: newEmail, username: newUsername })
+
+    // const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+    //   expiresIn: '24h',
+    // });
+
+    // res.cookie('session2', token, {
+    //   // domain: '.app.localhost',
+    //   httpOnly: true,
+    //   maxAge: ONE_DAY_IN_MS,
+    //   // sameSite: 'Lax' | 'None' | 'Strict',
+    //   sameSite: 'None',
+    //   secure: true
+    // });
+
+    res.json(user)
   })  
   .post('/create', async (req, res, next) => {
     const password = bcrypt.hashSync(req.body.password, 10);

@@ -17,9 +17,9 @@ const Register = ({ history, handleLogin }) => {
     if(status) return alert(message);
     else {
       const { token } = await userLogin(emailInput, passwordInput);
-      history.push('/places');
       handleLogin(token);
       localStorage.setItem('TOKEN', token);
+      history.push('/places');
 
     } 
   };

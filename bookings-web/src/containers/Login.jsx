@@ -11,7 +11,7 @@ const Login = ({ history, userToken, handleLogin }) => {
   const [passwordInput, setPasswordInput] = useState('');
 
   useEffect(() => {
-    console.log('user is logged in:', !!userToken);
+    console.log('from Login, user is logged in:', !!userToken);
     
   }, []);
 
