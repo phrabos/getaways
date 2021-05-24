@@ -34,7 +34,8 @@ module.exports = Router()
         httpOnly: true,
         maxAge: ONE_DAY_IN_MS,
         // sameSite: 'Lax' | 'None' | 'Strict',
-        // secure: true
+        sameSite: 'None',
+        secure: true
       });
 
       res.send({user, token});
