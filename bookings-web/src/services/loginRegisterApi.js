@@ -30,7 +30,7 @@ export const logUserOut = async () => {
     credentials: 'include'
   });
   const json = await res.json();
-  localStorage.removeItem('TOKEN');
+  localStorage.removeItem('USER');
   return json;
 };
 
