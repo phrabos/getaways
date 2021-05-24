@@ -12,8 +12,8 @@ module.exports = Router()
     res.json(users);
   })
   .put('/update', verifyToken, async (req, res, next) => {
-    const { username } = req.user
-    console.log(req.user)
+    const { username } = await User.findOne({ email: req.body.oldEmail })
+    console.log(username)
     console.log(req.body)
     const email = req.body.oldEmail
     const newEmail = req.body.newEmail || email
