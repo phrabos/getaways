@@ -69,7 +69,7 @@ const RegisterControls = ({
       />
       <br />
       <br />
-      <Button variant="contained" color="primary">Submit</Button>
+      <Button onClick={handleRegisterSubmit} variant="contained" color="primary">Submit</Button>
     </form>
   </>
 );

@@ -52,8 +52,9 @@ const Getaways = () => {
               style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
             >Prev</Button>}
             {page === 1 && <Button
+              disabled
               onClick={handlePrevPage} 
-              variant="disabled" 
+              variant="contained" 
               // color="secondary" 
               style={{ display: 'inline', marginRight: '10px', marginTop: '5px' }}
             >
@@ -68,8 +69,9 @@ const Getaways = () => {
           Next
             </Button>}
             {page === Math.ceil(places.length / 24) && <Button
+              disabled
               onClick={handleNextPage}  
-              variant="disabled" 
+              variant="contained" 
               color="secondary" 
               style={{ display: 'inline', marginTop: '5px' }}
             >

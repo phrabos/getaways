@@ -41,18 +41,27 @@ const Profile = ({ history, userToken }) => {
 
 
   return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
+      <img style={{ width: '100px' }} src="https://radar.llc/images/dog.png" alt="dog"/>
 
-    <ProfileControls 
-      oldEmailInput={oldEmailInput}
-      newEmailInput={newEmailInput}
-      usernameInput={usernameInput}
-      passwordInput={passwordInput}
-      handleUpdateSubmit={handleUpdateSubmit}
-      handleNameChange={handleNameChange}
-      handleOldEmailChange={handleOldEmailChange}
-      handleNewEmailChange={handleNewEmailChange}
-      handlePasswordChange={handlePasswordChange}
-    />
+      <ProfileControls 
+        oldEmailInput={oldEmailInput}
+        newEmailInput={newEmailInput}
+        usernameInput={usernameInput}
+        passwordInput={passwordInput}
+        handleUpdateSubmit={handleUpdateSubmit}
+        handleNameChange={handleNameChange}
+        handleOldEmailChange={handleOldEmailChange}
+        handleNewEmailChange={handleNewEmailChange}
+        handlePasswordChange={handlePasswordChange}
+      />
+    </div>
 
   
   );

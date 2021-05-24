@@ -46,7 +46,9 @@ export default function App() {
           <Route
             path="/register"
             exact
-            render={(routerProps) => <Register {...routerProps} />}
+            render={(routerProps) => <Register
+              handleLogin={handleLogin}
+              {...routerProps} />}
           >
           </Route> 
           <Route

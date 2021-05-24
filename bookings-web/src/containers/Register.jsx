@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 // import { useHistory } from 'react-router-dom';
 import RegisterControls from '../components/register-login/RegisterControls';
-import { userRegister } from '../services/loginRegisterApi';
+import { userLogin, userRegister } from '../services/loginRegisterApi';
 
-const Register = ({ history }) => {
+const Register = ({ history, handleLogin }) => {
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
@@ -14,7 +15,13 @@ const Register = ({ history }) => {
     e.preventDefault();
     const { status, message } = await userRegister(emailInput, usernameInput, passwordInput);
     if(status) return alert(message);
-    else history.push('/login');
+    else {
+      const { token } = await userLogin(emailInput, passwordInput);
+      history.push('/places');
+      handleLogin(token);
+      localStorage.setItem('TOKEN', token);
+
+    } 
   };
 
   const handleNameChange = (e) => {
@@ -30,22 +37,36 @@ const Register = ({ history }) => {
   };
 
   return (
-    <RegisterControls 
-      usernameInput={usernameInput}
-      emailInput={emailInput}
-      passwordInput={passwordInput}
-      handleRegisterSubmit={handleRegisterSubmit}
-      handleNameChange={handleNameChange}
-      handlePasswordChange={handlePasswordChange}
-      handleEmailChange={handleEmailChange}
-    />
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
+      <Typography
+        variant="h4"
+      >Welcome to Ruby&#39;s Pet Friendly Getaways
+      </Typography>
+      <img style={{ width: '200px' }} src="https://radar.llc/images/dog.png" alt="dog"/>
+      <RegisterControls 
+        usernameInput={usernameInput}
+        emailInput={emailInput}
+        passwordInput={passwordInput}
+        handleRegisterSubmit={handleRegisterSubmit}
+        handleNameChange={handleNameChange}
+        handlePasswordChange={handlePasswordChange}
+        handleEmailChange={handleEmailChange}
+      />
+    </div>
   );
 };
 
 Register.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }).isRequired
+  }).isRequired,
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default Register;

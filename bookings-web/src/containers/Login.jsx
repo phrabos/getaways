@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import LoginControls from '../components/register-login/LoginControls';
 import { userLogin } from '../services/loginRegisterApi';
 import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 const Login = ({ history, userToken, handleLogin }) => {
@@ -40,7 +41,9 @@ const Login = ({ history, userToken, handleLogin }) => {
       alignItems: 'center',
     }}>
       {/* eslint-disable-next-line react/no-unescaped-entities*/}
-      <Typography>Welcome to Ruby's Pet Friendly Getaways</Typography>
+      <Typography
+        variant="h4"
+      >Welcome to Ruby&#39;s Pet Friendly Getaways</Typography>
       <img style={{ width: '200px' }} src="https://radar.llc/images/dog.png" alt="dog"/>
       <LoginControls 
         usernameInput={usernameInput}
@@ -49,6 +52,9 @@ const Login = ({ history, userToken, handleLogin }) => {
         handleNameChange={handleNameChange}
         handlePasswordChange={handlePasswordChange}
       />
+      <br/>
+      <Typography component={Link} to={'/register'}>
+        Don&#39;t have an account? Signup Here!</Typography> 
     </div>
   
   );
