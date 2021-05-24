@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 // import { Link } from 'react-router-dom';
 
-const PlaceList = ({ places }) => {
+const PlaceList = ({ places, page }) => {
+  const placesPaged = places.slice(((page - 1) * 24), (page * 24));
+
   return (
     <div style={{
       display: 'flex',
       flexWrap: 'wrap',
     }}>
-      {places.map((place) => {
+      {placesPaged.map((place) => {
         return (
           // <Link to={`/places/${place.id}`} key={place.id}>
           <Place key={place.id} {...place} />
@@ -21,6 +23,7 @@ const PlaceList = ({ places }) => {
 };
 
 PlaceList.propTypes = {
+  page: PropTypes.number.isRequired,
   places: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

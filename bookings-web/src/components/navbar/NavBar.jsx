@@ -69,7 +69,7 @@ const NavBar = ({ userToken, handleLogout }) => {
             justifyContent: 'flex-end',
           }}>
             <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/places'}><List style={{ marginRight: '20px' }}>Getaways</List></Link> 
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/'}><List style={{ marginRight: '20px' }}>Login</List></Link> 
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to={'/login'}><List style={{ marginRight: '20px' }}>Login</List></Link> 
           </Container>
         </Toolbar>
       </AppBar>

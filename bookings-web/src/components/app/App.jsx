@@ -4,6 +4,7 @@ import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import Profile from '../../containers/Profile';
+import Home from '../../containers/Home';
 import {
   BrowserRouter as Router, 
   Route, 
@@ -29,6 +30,12 @@ export default function App() {
         <Switch>
           <Route
             path="/"
+            exact
+            render={(routerProps) => <Home {...routerProps} />}
+          >
+          </Route>
+          <Route
+            path="/login"
             exact
             render={(routerProps) => <Login 
               handleLogin={handleLogin}
