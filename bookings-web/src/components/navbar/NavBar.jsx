@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,15 +27,33 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NavBar = ({ userToken, handleLogout }) => {
+  const [username, setUsername] = useState(localStorage.getItem('USER'));
+
+  useEffect(() => {
+    const newUsername = JSON.stringify(localStorage.getItem('USER'));
+    setUsername(newUsername);
+  }, []);
+ 
 
   const classes = useStyles();
   if(userToken) return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <Link to={'/'}>
-            <HomeIcon className={classes.homebtn} size="large"/>
-          </Link>
+          <Container
+            style={{ 
+              display: 'flex',
+              width: '350px',
+              justifyContent: 'space-around',
+              alignItems: 'center', 
+            }}
+          >
+            <Link to={'/'}>
+              <HomeIcon className={classes.homebtn} size="large"/>
+            </Link>
+            <List>Welcome {username}</List>
+          </Container>
+         
           <Container style={{
             display: 'flex',
             justifyContent: 'flex-end',
