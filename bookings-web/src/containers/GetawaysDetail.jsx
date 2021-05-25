@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Place from '../components/places/Place';
 import { getSinglePlace } from '../services/placesApi';
 import { Button, Container, TextField, Typography } from '@material-ui/core';
+import { bookReservation } from '../services/bookingsApi';
 
 
 const GetawaysDetail = ({ match }) => {
@@ -18,10 +19,14 @@ const GetawaysDetail = ({ match }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleSumbit = (e) => {
+  const handleSumbit = async (e) => {
     e.preventDefault();
-    console.log(checkin);
-    console.log(checkout);
+    const { start_date, end_date, total_price, message } = await bookReservation(match.params.id, checkin, checkout);
+
+    if(!message) alert(`Your booking from ${start_date} to ${end_date} was a success. The total price is $${total_price}.`);
+
+    if(message) alert(` Sorry, ${message}.`);
+
   };
 
   if(loading) return <h1>Loading...</h1>;
