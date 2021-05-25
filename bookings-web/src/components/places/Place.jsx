@@ -8,10 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
-import { Typography } from '@material-ui/core';
+import { CardActionArea, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 450,
     margin: '2px',
@@ -24,16 +24,10 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
+  cardSubHeader: {
+    
+    color: 'grey'
+  }
 
 }));
 
@@ -55,47 +49,59 @@ const Place = ({
   return (
     <>
       <Card component={Link} to={`/places/${id}`} className={classes.root}>
-        <CardHeader 
-          title={name}
-          subheader={pool ? 'Has a Pool!' : ' .'}
-        />
-        <CardMedia 
-          className={classes.media}
-          image={image}
-          title={name}
-        />
-        <CardContent>
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            component="p"
-          >
-            {description}
-          </Typography>
-          <br/>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            {location}
-          </Typography>
-          <br/>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
+        <CardActionArea>
+          {pool && <CardHeader
+            disableTypography={true}
+            title={<Typography variant="h6" >{name}</Typography>}
+            subheader={<Typography variant={'body2'} className={classes.cardSubHeader}>Has a pool!</Typography>}
+          />}
+          {!pool && <CardHeader
+            disableTypography={true}
+            title={<Typography variant="h6" >{name}</Typography>}
+            subheader={<Typography 
+              variant={'body2'} 
+              className={classes.cardSubHeader}
+              style={{ visibility: 'hidden' }}
+            >Has a pool!</Typography>}
+          />}
+          <CardMedia 
+            className={classes.media}
+            image={image}
+            title={name}
+          />
+          <CardContent>
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              component="p"
+            >
+              {description}
+            </Typography>
+            <br/>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {location}
+            </Typography>
+            <br/>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
             Price per Night ${pricePerNight}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
             Max Guests: {maxGuests}
-          </Typography>
-        </CardContent>
+            </Typography>
+          </CardContent>
+        </CardActionArea>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon color="secondary" />
