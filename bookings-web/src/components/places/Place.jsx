@@ -17,6 +17,9 @@ const useStyles = makeStyles(() => ({
     maxWidth: 450,
     margin: '2px',
     textDecoration: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   cardLink: {
     textDecoration: 'none',
