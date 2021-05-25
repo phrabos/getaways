@@ -52,6 +52,7 @@ const NavBar = ({ userToken, handleLogout }) => {
             justifyContent: 'flex-end',
           }}>
             <List className={classes.linkbtn} component={Link} to={'/places'}>Getaways</List>
+            <List className={classes.linkbtn} component={Link} to={'/favorites'}>My Favorites</List>
             <List component={Link} to="/profile" className={classes.linkbtn}>Profile</List>
             <List
               className={classes.linkbtn}

@@ -41,3 +41,29 @@ export const getSinglePlace = async (id) => {
     petFriendly: result.pet_friendly,
   };
 };
+export const addToFavorites = async (id, isFavorite) => {
+  const response = await fetch(`${process.env.BASE_URL}/places/${id}`, { 
+    credentials: 'include',
+    method: 'PUT',
+    headers: { 'Content-Type':'application/jSON' },
+    body: JSON.stringify({ 
+      isFavorite,
+    })
+  });
+
+  const result = await response.json();
+  console.log(result);
+  return  {
+    id: result.id,
+    name: result.name,
+    description: result.description,
+    location: result.location,
+    image: result.image,
+    pool: result.pool,
+    wifi: result.wifi,
+    pricePerNight: result.price_per_night,
+    imageThumbnail: result.image_thumbnail,
+    maxGuests: result.max_guests,
+    petFriendly: result.pet_friendly,
+  };
+};

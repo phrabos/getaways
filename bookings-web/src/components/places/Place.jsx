@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import { CardActionArea, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { addToFavorites } from '../../services/placesApi';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,17 +40,31 @@ const Place = ({
   pricePerNight,
   image,
   maxGuests,
-  // petFriendly,
+  petFriendly,
   pool,
   // wifi,
 }) => {
-
+  const [favorite, setFavorite] = useState(petFriendly);
   const classes = useStyles();
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if(didMount.current){
+      addToFavorites(id, favorite);
+    } 
+    else didMount.current = true;
+  }, [favorite]);
+
+  const handleFavorite = async (e) => {
+    console.log(e.currentTarget.name);
+    favorite ? setFavorite(false) : setFavorite(true);
+    // await addToFavorites(id, favorite); 
+  };
 
   return (
     <>
-      <Card component={Link} to={`/places/${id}`} className={classes.root}>
-        <CardActionArea>
+      <Card className={classes.root}>
+        <CardActionArea component={Link} to={`/places/${id}`}>
           {pool && <CardHeader
             disableTypography={true}
             title={<Typography variant="h6" >{name}</Typography>}
@@ -103,8 +118,17 @@ const Place = ({
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon color="secondary" />
+          <IconButton 
+            aria-label="add to favorites"
+            name={id}
+            onClick={(e) => handleFavorite(e)}
+          >
+            {favorite && <FavoriteIcon 
+              color="secondary"
+            />}
+            {!favorite && <FavoriteIcon 
+              color="disabled"
+            />}
           </IconButton>
         </CardActions>
       </ Card>
@@ -121,7 +145,7 @@ Place.propTypes = {
   image: PropTypes.string.isRequired,
   // imageThumbnail: PropTypes.string.isRequired,
   maxGuests: PropTypes.number.isRequired,
-  // petFriendly: PropTypes.bool.isRequired,
+  petFriendly: PropTypes.bool.isRequired,
   pool: PropTypes.bool.isRequired,
   // wifi: PropTypes.bool.isRequired,
 };

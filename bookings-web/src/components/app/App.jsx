@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Getaways from '../../containers/Getaways';
+import Favorites from '../../containers/Favorites';
 import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
@@ -70,6 +71,12 @@ export default function App() {
             path="/places"
             exact
             render={(routerProps) => <Getaways {...routerProps} />}
+          >
+          </Route>
+          <Route
+            path="/favorites"
+            exact
+            render={(routerProps) => <Favorites {...routerProps} />}
           >
           </Route>
           <Route

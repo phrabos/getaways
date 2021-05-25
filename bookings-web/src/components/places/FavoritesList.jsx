@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 // import { Link } from 'react-router-dom';
 
-const PlaceList = ({ places, page }) => {
-  const placesPaged = places.slice(((page - 1) * 24), (page * 24));
+const FavoritesList = ({ places }) => {
+  const placesPaged = places.filter((place) => place.petFriendly);
 
 
   return (
@@ -12,6 +12,8 @@ const PlaceList = ({ places, page }) => {
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+      width: '100%',
+      backgroundColor: 'grey'
     }}>
       {placesPaged.map((place) => {
         return (
@@ -24,8 +26,8 @@ const PlaceList = ({ places, page }) => {
   );
 };
 
-PlaceList.propTypes = {
-  page: PropTypes.number.isRequired,
+FavoritesList.propTypes = {
+  // page: PropTypes.number.isRequired,
   places: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -43,4 +45,4 @@ PlaceList.propTypes = {
   ).isRequired,
 };
 
-export default PlaceList;
+export default FavoritesList;
