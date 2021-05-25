@@ -19,8 +19,8 @@ module.exports = Router()
     const newEmail = req.body.newEmail || email
     const newUsername = req.body.newUsername || username
 
-    await User.findOneAndUpdate({ email }, { email: newEmail, username: newUsername })
-    const user = await User.findOne({ email });
+    const user = await User.findOneAndUpdate({ email }, { email: newEmail, username: newUsername }, { new: true })
+
     console.log('user', user);
 
     const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
@@ -56,7 +56,6 @@ module.exports = Router()
     // if(!req.body.email)res.send('Email Required')
     try {
       const { token, user } = await User.authorize(req.body);
-      const loginSuccess = {loggedIn: true}
 
       res.cookie('session', token, {
         // domain: '.app.localhost',
