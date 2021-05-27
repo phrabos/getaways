@@ -67,3 +67,8 @@ export const addToFavorites = async (id, isFavorite) => {
     petFriendly: result.pet_friendly,
   };
 };
+
+// export const getPlaceAndAddToFavorites = (id, ((response) => console.log(response)) => {
+//   const response = fetch(`${process.env.BASE_URL}/places/${id}`);
+
+// };

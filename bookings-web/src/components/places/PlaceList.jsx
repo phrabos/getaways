@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 // import { Link } from 'react-router-dom';
 
-const PlaceList = ({ places, page }) => {
+const PlaceList = ({ places, page, handleFavoriteUpdate }) => {
   const placesPaged = places.slice(((page - 1) * 24), (page * 24));
 
 
@@ -15,9 +15,8 @@ const PlaceList = ({ places, page }) => {
     }}>
       {placesPaged.map((place) => {
         return (
-          // <Link to={`/places/${place.id}`} key={place.id}>
-          <Place key={place.id} {...place} />
-          // {/* </Link>  */}
+          <Place handleFavoriteUpdate={handleFavoriteUpdate} key={place.id} {...place} />
+
         );}
       )}
     </div>
@@ -26,6 +25,7 @@ const PlaceList = ({ places, page }) => {
 
 PlaceList.propTypes = {
   page: PropTypes.number.isRequired,
+  handleFavoriteUpdate: PropTypes.func.isRequired,
   places: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

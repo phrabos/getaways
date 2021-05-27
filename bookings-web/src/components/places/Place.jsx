@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -45,23 +45,22 @@ const Place = ({
   maxGuests,
   petFriendly,
   pool,
+  handleFavoriteUpdate,
   // wifi,
 }) => {
-  const [favorite, setFavorite] = useState(petFriendly);
   const classes = useStyles();
-  const didMount = useRef(false);
+  // const didMount = useRef(false);
 
-  useEffect(() => {
-    if(didMount.current){
-      addToFavorites(id, favorite);
-    } 
-    else didMount.current = true;
-  }, [favorite]);
+  // useEffect(() => {
+  //   if(didMount.current){
+  //     addToFavorites(id, favorite);
+  //   } 
+  //   else didMount.current = true;
+  // }, [favorite]);
 
-  const handleFavorite = async (e) => {
-    console.log(e.currentTarget.name);
-    favorite ? setFavorite(false) : setFavorite(true);
-    // await addToFavorites(id, favorite); 
+  const handleFavorite = async () => {
+    const response = await addToFavorites(id, petFriendly ? false : true); 
+    handleFavoriteUpdate(response);
   };
 
   return (
@@ -124,12 +123,13 @@ const Place = ({
           <IconButton 
             aria-label="add to favorites"
             name={id}
-            onClick={(e) => handleFavorite(e)}
+            value={petFriendly}
+            onClick={handleFavorite}
           >
-            {favorite && <FavoriteIcon 
+            {petFriendly && <FavoriteIcon 
               color="secondary"
             />}
-            {!favorite && <FavoriteIcon 
+            {!petFriendly && <FavoriteIcon 
               color="disabled"
             />}
           </IconButton>
@@ -146,6 +146,7 @@ Place.propTypes = {
   location: PropTypes.string.isRequired,
   pricePerNight: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  handleFavoriteUpdate: PropTypes.func.isRequired,
   // imageThumbnail: PropTypes.string.isRequired,
   maxGuests: PropTypes.number.isRequired,
   petFriendly: PropTypes.bool.isRequired,

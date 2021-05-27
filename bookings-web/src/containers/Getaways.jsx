@@ -16,6 +16,16 @@ const Getaways = () => {
     console.log(page);
   }, [page]);
 
+  const handleFavoriteUpdate = ({ id, petFriendly }) => {
+    setPlaces(places => places.map((place) => {
+      if(place.id === id) return {
+        ...place,
+        petFriendly,
+      };
+      return place;
+    }));
+  };
+
   const handlePrevPage = () => {
     setPage(prevState => prevState - 1);
   };
@@ -85,7 +95,7 @@ const Getaways = () => {
           </Typography>
         </Container>
       </div>
-      <PlaceList places={places} page={page} />
+      <PlaceList handleFavoriteUpdate={handleFavoriteUpdate} places={places} page={page} />
     </>
   );
 };
