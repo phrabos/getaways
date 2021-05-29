@@ -52,7 +52,6 @@ export const addToFavorites = async (id, isFavorite) => {
   });
 
   const result = await response.json();
-  console.log(result);
   return  {
     id: result.id,
     name: result.name,
