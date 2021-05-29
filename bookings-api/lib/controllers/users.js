@@ -39,12 +39,18 @@ module.exports = Router()
     res.json({ user, token })
   })  
   .post('/create', async (req, res, next) => {
+    const email = req.body.email;
+    const username = req.body.username;
     const password = bcrypt.hashSync(req.body.password, 10);
+    const uniqueEmail = await User.findOne({ email }, );
+    const uniqueUsername = await User.findOne({ username }, );
+    if(uniqueEmail) res.send({status: 501, message: 'email already used'})
+    if(uniqueUsername) res.send({status: 501, message: 'username already used'})
 
     try {
       const user = await User.create({
-        username: req.body.username,
-        email: req.body.email,
+        username,
+        email,
         password,
       });
       res.send(user);

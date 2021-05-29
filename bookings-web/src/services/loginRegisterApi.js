@@ -21,6 +21,7 @@ export const userRegister = async (email, username, password) => {
     })
   });
   const json = await res.json();
+  console.log('useRegister', json);
   return json;
 
 };

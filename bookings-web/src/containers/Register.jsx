@@ -12,14 +12,18 @@ const Register = ({ history, handleLogin }) => {
 
 
   const handleRegisterSubmit = async (e) => {
+    if(!usernameInput) return alert('must enter a username!');
+    if(!passwordInput) return alert('must enter a password!');
+    if(!emailInput) return alert('must enter an email address!');
     e.preventDefault();
     const { status, message } = await userRegister(emailInput, usernameInput, passwordInput);
     if(status) return alert(message);
     else {
-      const { token } = await userLogin(emailInput, passwordInput);
-      handleLogin(token);
-      localStorage.setItem('TOKEN', token);
+      const { user } = await userLogin(emailInput, passwordInput);
+      console.log('user from login fetch', user);
       history.push('/places');
+      handleLogin(user.username);
+      localStorage.setItem('USER', user.username);
 
     } 
   };
