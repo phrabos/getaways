@@ -6,7 +6,6 @@ export const userLogin = async (email, password) => {
     body: JSON.stringify({ email, password })
   });
   const json = await res.json();
-  console.log(json);
   return json;
 };
 
@@ -21,7 +20,6 @@ export const userRegister = async (email, username, password) => {
     })
   });
   const json = await res.json();
-  console.log('useRegister', json);
   return json;
 
 };
@@ -48,8 +46,6 @@ export const userUpdate = async (oldEmail, newEmail, password, newUsername) => {
     })
   });
   const json = await res.json();
-  console.log(json);
-  // localStorage.setItem('TOKEN', json.token);
   return json;
 };
 

@@ -20,7 +20,6 @@ const Register = ({ history, handleLogin }) => {
     if(status) return alert(message);
     else {
       const { user } = await userLogin(emailInput, passwordInput);
-      console.log('user from login fetch', user);
       history.push('/places');
       handleLogin(user.username);
       localStorage.setItem('USER', user.username);
