@@ -47,9 +47,18 @@ module.exports = Router()
     const bookings = await Booking.find({ user_id: req.user.id }).exec();
     res.json(bookings);
   })
+  .get('/all', async (req, res, next) => {
+    const bookings = await Booking.find().exec();
+    res.json(bookings);
+  })
   .get('/:id', verifyToken, async (req, res, next) => {
     const booking = await Booking.findOne({ _id: req.params.id }).exec();
     res.send(booking);
+  })
+  .delete('/:id', verifyToken, async (req, res, next) => {
+    const id = req.params.id
+    const booking = await Booking.deleteOne({ _id: id })
+    res.json({message: 'booking cancelled', booking});
   })
   .put('/:id', verifyToken, async (req, res, next) => {
     res.send('Updated');
