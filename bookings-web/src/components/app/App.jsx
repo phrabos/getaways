@@ -5,6 +5,7 @@ import GetawaysDetail from '../../containers/GetawaysDetail';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import Profile from '../../containers/Profile';
+import Reservations from '../../containers/Reseravtions';
 import Home from '../../containers/Home';
 import {
   BrowserRouter as Router, 
@@ -77,6 +78,12 @@ export default function App() {
             path="/favorites"
             exact
             render={(routerProps) => <Favorites {...routerProps} />}
+          >
+          </Route>
+          <Route
+            path="/reservations"
+            exact
+            render={(routerProps) => <Reservations {...routerProps} />}
           >
           </Route>
           <Route

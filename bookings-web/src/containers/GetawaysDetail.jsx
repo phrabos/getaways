@@ -1,16 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Place from '../components/places/Place';
-import { getSinglePlace } from '../services/placesApi';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 import { Button, Container, TextField, Typography } from '@material-ui/core';
+import { getSinglePlace } from '../services/placesApi';
 import { bookReservation } from '../services/bookingsApi';
 
+const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 450,
+    margin: '2px',
+    textDecoration: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  cardLink: {
+    textDecoration: 'none',
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  cardSubHeader: {
+    
+    color: 'grey'
+  }
+
+}));
 
 const GetawaysDetail = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const [place, setPlace] = useState({});
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
+  const classes = useStyles();
 
   useEffect(() => {
     setLoading(true);
@@ -28,6 +55,7 @@ const GetawaysDetail = ({ match }) => {
     if(message) alert(` Sorry, ${message}.`);
 
   };
+
 
   if(loading) return <h1>Loading...</h1>;
   return (
@@ -69,16 +97,59 @@ const GetawaysDetail = ({ match }) => {
         flexWrap: 'wrap',
         justifyContent: 'center'
       }}>
-        <Place
-          id={place.id} 
-          name={place.name}
-          description={place.description}
-          location={place.location}
-          pricePerNight={place.pricePerNight}
-          image={place.image}
-          maxGuests={place.maxGuests}
-          pool={place.pool}
-        />
+        <Card className={classes.root}>
+          {place.pool && <CardHeader
+            disableTypography={true}
+            title={<Typography variant="h6" >{place.name}</Typography>}
+            subheader={<Typography variant={'body2'} className={classes.cardSubHeader}>Has a pool!</Typography>}
+          />}
+          {!place.pool && <CardHeader
+            disableTypography={true}
+            title={<Typography variant="h6" >{place.name}</Typography>}
+            subheader={<Typography 
+              variant={'body2'} 
+              className={classes.cardSubHeader}
+              style={{ visibility: 'hidden' }}
+            >Has a pool!</Typography>}
+          />}
+          <CardMedia 
+            className={classes.media}
+            image={place.image}
+            title={place.name}
+          />
+          <CardContent>
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              component="p"
+            >
+              {place.description}
+            </Typography>
+            <br/>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {place.location}
+            </Typography>
+            <br/>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+            Price per Night ${place.pricePerNight}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+            Max Guests: {place.maxGuests}
+            </Typography>
+          </CardContent>       
+        </ Card>
       </div>
      
     </>

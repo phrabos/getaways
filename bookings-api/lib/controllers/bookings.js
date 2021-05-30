@@ -45,6 +45,13 @@ module.exports = Router()
   })
   .get('/', verifyToken, async (req, res, next) => {
     const bookings = await Booking.find({ user_id: req.user.id }).exec();
+    console.log(bookings)
+    const placeOne = await Place.find({ id: '60ac55a713f85d2a6af9a201'})
+    console.log('place', placeOne)
+    const bookingsList = bookings.forEach(async booking => (
+     await Place.findOne({ id: booking.place_id })
+    ));
+    console.log(bookingsList)
     res.json(bookings);
   })
   .get('/all', async (req, res, next) => {

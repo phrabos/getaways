@@ -15,13 +15,23 @@ const Favorites = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleFavoriteUpdate = ({ id, petFriendly }) => {
+    setPlaces(places => places.map((place) => {
+      if(place.id === id) return {
+        ...place,
+        petFriendly,
+      };
+      return place;
+    }));
+  };
+
   if(loading) return <h1>Loading...</h1>;
   return (
     <>
       <Typography
         style={{ textAlign: 'center', marginBottom: '10px' }} 
         variant="h4">My Favorites!</Typography>
-      <FavoritesList places={places} />
+      <FavoritesList places={places} handleFavoriteUpdate={handleFavoriteUpdate} />
     </>
   );
 };

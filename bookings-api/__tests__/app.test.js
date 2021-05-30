@@ -18,11 +18,11 @@ describe('Bookings API routes', () => {
   })
   // afterAll(() => mongoose.disconnect);
 
-  test('updates a user\'s email and username', async () => {
+  test.skip('updates a user\'s email and username', async () => {
     const user = await request(app)
       .put('/api/v1/users/update')
       .send({
-        newUsername: 'Patrick-upated-test',
+        newUsername: 'Patrick5',
         oldEmail: 'test@test.com'
       })
     .set('Cookie', 'session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGE3MTE0NGE4NmY0N2M2OTRhNGQyNTIiLCJ1c2VybmFtZSI6InBhdHJpY2stdXBkYXRlLWNsaWVudCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImNyZWF0ZWRBdCI6IjIwMjEtMDUtMjFUMDE6NDc6NDguOTU1WiIsInVwZGF0ZWRBdCI6IjIwMjEtMDUtMjlUMTQ6NDA6NDguOTQwWiIsIl9fdiI6MCwiaWF0IjoxNjIyMjk5MjQ5LCJleHAiOjE2MjIzODU2NDl9.M8u2Q_mtuxKe0x3Af87vaqD32GXu9oBuAdqS_zCGnc0')
@@ -34,7 +34,7 @@ describe('Bookings API routes', () => {
         "createdAt": "2021-05-21T01:47:48.955Z", 
         "email": "test@test.com", 
         "updatedAt": expect.any(String), 
-        "username": "Patrick-upated-test"
+        "username": "Patrick5"
       }
     })
   })
@@ -52,7 +52,7 @@ describe('Bookings API routes', () => {
         "createdAt": "2021-05-21T01:47:48.955Z", 
         "email": "test@test.com", 
         "updatedAt": expect.any(String), 
-        "username": "Patrick-upated-test"
+        "username": "Patrick"
       }
     })
   })

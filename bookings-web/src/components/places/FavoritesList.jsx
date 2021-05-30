@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 // import { Link } from 'react-router-dom';
 
-const FavoritesList = ({ places }) => {
+const FavoritesList = ({ places, handleFavoriteUpdate }) => {
   const placesPaged = places.filter((place) => place.petFriendly);
 
 
@@ -18,7 +18,7 @@ const FavoritesList = ({ places }) => {
       {placesPaged.map((place) => {
         return (
           // <Link to={`/places/${place.id}`} key={place.id}>
-          <Place key={place.id} {...place} />
+          <Place key={place.id} {...place} handleFavoriteUpdate={handleFavoriteUpdate} />
           // {/* </Link>  */}
         );}
       )}
@@ -28,6 +28,7 @@ const FavoritesList = ({ places }) => {
 
 FavoritesList.propTypes = {
   // page: PropTypes.number.isRequired,
+  handleFavoriteUpdate: PropTypes.func.isRequired,
   places: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
