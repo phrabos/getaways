@@ -41,7 +41,6 @@ module.exports = Router()
     res.json(place);
   })
   .put('/:id', async (req, res, next) => {
-    console.log(req.params.id)
     const place = await Place.findOneAndUpdate({ _id: req.params.id }, { pet_friendly: req.body.isFavorite}, { new: true });
     console.log(place)
     res.json(place);

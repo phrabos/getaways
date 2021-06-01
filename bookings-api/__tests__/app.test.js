@@ -86,4 +86,51 @@ describe('Bookings API routes', () => {
         expect(user.headers['set-cookie']).toEqual(["session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"])
   })
 
+  test('gets a place by ID', async () => {
+    const place = await agent
+      .get('/api/v1/places/60b655bdbb56fc1fb858a525')
+
+      expect(place.body).toEqual({
+        "__v": 0, 
+        "createdAt": expect.any(String),
+        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "id": "60b655bdbb56fc1fb858a525", 
+        "image": "http://placeimg.com/1080/800", "image_thumbnail": "http://placeimg.com/400/400", "location": "2250 Bobbie Passage, Fayetteville, West Virginia, 58757-2561", "max_guests": 6, 
+        "name": "Refined Suites", 
+        "pet_friendly": expect.any(Boolean), 
+        "pool": false, 
+        "price_per_night": 612, 
+        "slug": "refined-suites", 
+        "updatedAt": expect.any(String), 
+        "wifi": true});
+  })
+  test('updates a place by ID', async () => {
+    const place = await agent
+      .put('/api/v1/places/60b655bdbb56fc1fb858a525')
+      .send({
+        isFavorite: false,
+      })
+
+
+      expect(place.body).toEqual({
+        "__v": 0, 
+        "createdAt": expect.any(String),
+        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "id": "60b655bdbb56fc1fb858a525", 
+        "image": "http://placeimg.com/1080/800", "image_thumbnail": "http://placeimg.com/400/400", "location": "2250 Bobbie Passage, Fayetteville, West Virginia, 58757-2561", "max_guests": 6, 
+        "name": "Refined Suites", 
+        "pet_friendly": false, 
+        "pool": false, 
+        "price_per_night": 612, 
+        "slug": "refined-suites", 
+        "updatedAt": expect.any(String), 
+        "wifi": true});
+  })
+  test('gets all places', async () => {
+    const place = await agent
+      .get('/api/v1/places')
+
+      expect(place.body.places).toEqual(expect.any(Array));
+  })
+
 })
