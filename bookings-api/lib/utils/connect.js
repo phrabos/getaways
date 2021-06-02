@@ -3,10 +3,10 @@ const { URL } = require('url');
 
 module.exports = (url = process.env.MONGODB_URI) => {
   mongoose.connect(url, {
-    useCreateIndex: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   });
 
   mongoose.connection.on('connected', () => {

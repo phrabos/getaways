@@ -7,21 +7,26 @@ const verifyToken = require('../utils/verify-token');
 const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
 module.exports = Router()
+.get('/', verifyToken, async (req, res, next) => {
+  const { email } = req.user;
+  const user = await User.findOne({ email })
+  res.json(user)
+})
   .get('/all', async (req, res, next) => {
     const users = await User.find({}).exec();
     res.json(users);
   })
   .put('/update', verifyToken, async (req, res, next) => {
     const { username } = req.user
-    console.log(username)
-    console.log(req.body)
+    // console.log(username)
+    // console.log(req.body)
     const email = req.body.oldEmail
     const newEmail = req.body.newEmail || email
     const newUsername = req.body.newUsername || username
 
     const user = await User.findOneAndUpdate({ email }, { email: newEmail, username: newUsername }, { new: true })
 
-    console.log('user', user);
+    // console.log('user', user);
 
     const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
       expiresIn: '24h',

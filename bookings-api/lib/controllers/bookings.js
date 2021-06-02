@@ -58,7 +58,7 @@ module.exports = Router()
         image: placesList[i].image_thumbnail,
       })
     })
-    console.log(mappedList)
+    // console.log(mappedList)
     res.json(mappedList);
   })
   .get('/all', async (req, res, next) => {

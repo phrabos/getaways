@@ -15,12 +15,12 @@ const Reservations = () => {
   }, []);
 
   const handleCancel = async (e) => {
-    const confirm = await cancelReservation(e.currentTarget.value);
+    await cancelReservation(e.currentTarget.value);
     setLoading(true);
     getReservations()
       .then(setReservations)
       .finally(() => setLoading(false));
-    console.log(confirm);
+    // console.log(confirm);
   };
 
   if(loading) return <h1>Loading...</h1>;

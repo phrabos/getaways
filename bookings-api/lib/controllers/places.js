@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const verifyToken = require('../utils/connect');
+const verifyToken = require('../utils/verify-token');
 const Place = require('../models/Place');
 
 module.exports = Router()
@@ -42,7 +42,7 @@ module.exports = Router()
   })
   .put('/:id', async (req, res, next) => {
     const place = await Place.findOneAndUpdate({ _id: req.params.id }, { pet_friendly: req.body.isFavorite}, { new: true });
-    console.log(place)
+    // console.log(place)
     res.json(place);
   });
 

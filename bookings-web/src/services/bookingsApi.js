@@ -8,7 +8,7 @@ export const bookReservation = async (place_id, start_date, end_date) => {
     })
   });
   const json = await res.json();
-  console.log(json);
+  // console.log(json);
   return json;
 };
 
@@ -37,8 +37,8 @@ export const cancelReservation = async (id) => {
     headers: { 'Content-Type':'application/jSON' },
   });
   const json = await res.json();
-  console.log('from func', json);
-  console.log('from func id', id);
+  // console.log('from func', json);
+  // console.log('from func id', id);
   return json;
 };
 

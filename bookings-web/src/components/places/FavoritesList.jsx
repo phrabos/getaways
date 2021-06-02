@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Place from './Place';
 // import { Link } from 'react-router-dom';
 
-const FavoritesList = ({ places, handleFavoriteUpdate }) => {
-  const placesPaged = places.filter((place) => place.petFriendly);
-
+const FavoritesList = ({ favorites, handleFavoriteUpdate }) => {
+  // const filteredPlaces = places.filter((place) => place.petFriendly);
 
   return (
     <div style={{
@@ -13,13 +12,23 @@ const FavoritesList = ({ places, handleFavoriteUpdate }) => {
       flexWrap: 'wrap',
       justifyContent: 'center',
       width: '100%',
-      backgroundColor: 'grey'
+      // backgroundColor: 'grey'
     }}>
-      {placesPaged.map((place) => {
+      {favorites && favorites.map((fave) => {
         return (
-          // <Link to={`/places/${place.id}`} key={place.id}>
-          <Place key={place.id} {...place} handleFavoriteUpdate={handleFavoriteUpdate} />
-          // {/* </Link>  */}
+          <Place 
+            key={fave.id}
+            handleFavoriteUpdate={handleFavoriteUpdate}
+            id={fave.placeId} 
+            name={fave.name}
+            description={fave.description}
+            location={fave.location}
+            pricePerNight={fave.pricePerNight}
+            image={fave.image}
+            maxGuests={fave.maxGuests}
+            pool={fave.pool}
+            isFave={true}
+          />
         );}
       )}
     </div>
@@ -29,7 +38,7 @@ const FavoritesList = ({ places, handleFavoriteUpdate }) => {
 FavoritesList.propTypes = {
   // page: PropTypes.number.isRequired,
   handleFavoriteUpdate: PropTypes.func.isRequired,
-  places: PropTypes.arrayOf(
+  favorites: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -43,7 +52,7 @@ FavoritesList.propTypes = {
       pool: PropTypes.bool.isRequired,
       wifi: PropTypes.bool.isRequired,
     })
-  ).isRequired,
+  )
 };
 
 export default FavoritesList;

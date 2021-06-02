@@ -10,7 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import { CardActionArea, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { addToFavorites } from '../../services/placesApi';
+// import { addToFavorites } from '../../services/placesApi';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -43,28 +43,21 @@ const Place = ({
   pricePerNight,
   image,
   maxGuests,
-  petFriendly,
   pool,
   handleFavoriteUpdate,
   // wifi,
+  isFave
 }) => {
   const classes = useStyles();
-  // const didMount = useRef(false);
 
-  // useEffect(() => {
-  //   if(didMount.current){
-  //     addToFavorites(id, favorite);
-  //   } 
-  //   else didMount.current = true;
-  // }, [favorite]);
-
-  const handleFavorite = async () => {
-    const response = await addToFavorites(id, petFriendly ? false : true); 
-    handleFavoriteUpdate(response);
-  };
+  // const handleFavorite = async () => {
+  //   const response = await addToFavorites(id, petFriendly ? false : true); 
+  //   handleFavoriteUpdate(response);
+  // };
 
   return (
     <>
+      {/* {console.log('isfave', isFave)} */}
       <Card className={classes.root}>
         <CardActionArea component={Link} to={`/places/${id}`}>
           {pool && <CardHeader
@@ -123,13 +116,13 @@ const Place = ({
           <IconButton 
             aria-label="add to favorites"
             name={id}
-            value={petFriendly}
-            onClick={handleFavorite}
+            value={id}
+            onClick={handleFavoriteUpdate}
           >
-            {petFriendly && <FavoriteIcon 
+            {isFave && <FavoriteIcon 
               color="secondary"
             />}
-            {!petFriendly && <FavoriteIcon 
+            {!isFave && <FavoriteIcon 
               color="disabled"
             />}
           </IconButton>
@@ -149,7 +142,7 @@ Place.propTypes = {
   handleFavoriteUpdate: PropTypes.func.isRequired,
   // imageThumbnail: PropTypes.string.isRequired,
   maxGuests: PropTypes.number.isRequired,
-  petFriendly: PropTypes.bool.isRequired,
+  isFave: PropTypes.any,
   pool: PropTypes.bool.isRequired,
   // wifi: PropTypes.bool.isRequired,
 };

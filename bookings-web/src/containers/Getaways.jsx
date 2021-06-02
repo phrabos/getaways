@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { getPlaces } from '../services/placesApi';
+import { addToFavorites, getPlaces, getFavoritesList, removeFavorite } from '../services/placesApi';
 import PlaceList from '../components/places/PlaceList';
 import { Button, Container, Typography } from '@material-ui/core';
 
 const Getaways = () => {
   const [places, setPlaces] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     getPlaces()
-      .then(setPlaces)
+      .then(setPlaces);
+    getFavoritesList()
+      .then(setFavorites)
       .finally(() => setLoading(false));
-    console.log(page);
+
   }, [page]);
 
-  const handleFavoriteUpdate = ({ id, petFriendly }) => {
-    setPlaces(places => places.map((place) => {
-      if(place.id === id) return {
-        ...place,
-        petFriendly,
-      };
-      return place;
-    }));
+ 
+  const handleFavoriteUpdate = (e) => {
+    const isFave = favorites.find(fave => fave.placeId == e.currentTarget.value);
+    if(isFave){
+      removeFavorite(e.currentTarget.value)
+        .then(() => getFavoritesList())
+        .then(setFavorites);
+    }
+    else {
+      addToFavorites(e.currentTarget.value)
+        .then(() => getFavoritesList())
+        .then(setFavorites);
+    }
+    // setLoading(true);
+
   };
+  
 
   const handlePrevPage = () => {
     setPage(prevState => prevState - 1);
@@ -36,6 +47,7 @@ const Getaways = () => {
   if(loading) return <h1>Loading...</h1>;
   return (
     <>
+      {/* {console.log('getaways', favorites)} */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -96,7 +108,7 @@ const Getaways = () => {
           </Typography>
         </Container>
       </div>
-      <PlaceList handleFavoriteUpdate={handleFavoriteUpdate} places={places} page={page} />
+      <PlaceList handleFavoriteUpdate={handleFavoriteUpdate} places={places} favorites={favorites} page={page} />
     </>
   );
 };

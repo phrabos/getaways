@@ -12,6 +12,7 @@ app.use(
 );
 app.use(cookieParser());
 
+app.use('/api/v1/favorites', require('./controllers/favorites'));
 app.use('/api/v1/bookings', require('./controllers/bookings'));
 app.use('/api/v1/places', require('./controllers/places'));
 // app.use('/api/v1/reviews', require('./controllers/reviews'));
