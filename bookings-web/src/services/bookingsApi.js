@@ -19,8 +19,15 @@ export const getReservations = async () => {
     headers: { 'Content-Type':'application/jSON' },
   });
   const json = await res.json();
-  console.log(json);
-  return json;
+  return json.map(place => (
+    {
+      id:place.bookingId,
+      image: place.image,
+      name: place.name,
+      location: place.location,
+      totalPrice: place.totalPrice,
+    }
+  ));
 };
 
 export const cancelReservation = async (id) => {
@@ -31,6 +38,7 @@ export const cancelReservation = async (id) => {
   });
   const json = await res.json();
   console.log('from func', json);
+  console.log('from func id', id);
   return json;
 };
 

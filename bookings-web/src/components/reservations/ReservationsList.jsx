@@ -1,53 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Place from '../places/Place';
 import { Button, Container, Typography } from '@material-ui/core';
-
-// import { Link } from 'react-router-dom';
 
 const ReservationsList = ({ reservations, handleCancel }) => {
 
   return (
-    // <div style={{
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   flexWrap: 'wrap',
-    //   justifyContent: 'center',
-    //   width: '100%',
-    //   // backgroundColor: 'grey'
-    // }}>
     <>
-      {reservations.map((place) => {
+      {reservations.map((place, i) => {
         return (
-          // <Link to={`/places/${place.id}`} key={place.id}>
-          // <Place key={place.id} {...place} />
           <Container
+            key={`${place.id} - ${i}`}
             style={{
               display: 'flex',
+              flexDirection: 'column',
               // flexWrap: 'wrap',
               justifyContent: 'center',
               alignItems: 'center',
               margin: '10px',
-            // backgroundColor: 'grey'
+              maxWidth: '100%',
+              border: '1px solid salmon'
             }} 
-            key={place._id}>
+          >
             <Typography 
-              key={place._id}
-              style={{ marginRight: '5px' }} >ID: {place._id} : Price ${place.total_price}</Typography>
+              style={{ marginRight: '5px', width: '100%', textAlign: 'center' }} >{place.name}</Typography>
+            <Typography 
+              style={{ marginRight: '5px', width: '100%', textAlign: 'center' }} >{place.location}</Typography>
+            <Typography 
+              style={{ marginRight: '5px', width: '100%', textAlign: 'center' }} >Total: ${place.totalPrice}</Typography>
+            <img 
+              style={{ width: '100px', marginBottom: '5px' }} 
+              src={place.image} 
+              alt={place.name} />
 
             <Button 
               color="primary" 
               variant="contained"
               size="small"
-              value={place._id}
+              value={place.id}
               onClick={handleCancel}>Cancel
             </Button>
           </Container>
-          // {/* </Link>  */}
         );}
       )}
     </>
-    // </div>
   );
 };
 
@@ -56,19 +51,11 @@ ReservationsList.propTypes = {
   handleCancel: PropTypes.func.isRequired,
   reservations: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      total_price: PropTypes.number.isRequired,
-      // id: PropTypes.string.isRequired,
-      // name: PropTypes.string.isRequired,
-      // description: PropTypes.string.isRequired,
-      // location: PropTypes.string.isRequired,
-      // pricePerNight: PropTypes.number.isRequired,
-      // image: PropTypes.string.isRequired,
-      // imageThumbnail: PropTypes.string.isRequired,
-      // maxGuests: PropTypes.number.isRequired,
-      // petFriendly: PropTypes.bool.isRequired,
-      // pool: PropTypes.bool.isRequired,
-      // wifi: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      totalPrice: PropTypes.number.isRequired,
     })
   ).isRequired,
 };

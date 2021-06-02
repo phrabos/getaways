@@ -45,14 +45,21 @@ module.exports = Router()
   })
   .get('/', verifyToken, async (req, res, next) => {
     const bookings = await Booking.find({ user_id: req.user.id }).exec();
-    console.log(bookings)
-    const placeOne = await Place.find({ id: '60ac55a713f85d2a6af9a201'})
-    console.log('place', placeOne)
-    const bookingsList = bookings.forEach(async booking => (
-     await Place.findOne({ id: booking.place_id })
-    ));
-    console.log(bookingsList)
-    res.json(bookings);
+    // console.log(bookings);
+    const placesList = await Promise.all(bookings.map(booking => (
+     Place.findOne({ _id: booking.place_id })
+    )));
+    const mappedList = placesList.map((_, i) => {
+      return ({
+        bookingId: bookings[i]._id,
+        totalPrice: bookings[i].total_price,
+        name: placesList[i].name,
+        location: placesList[i].location,
+        image: placesList[i].image_thumbnail,
+      })
+    })
+    console.log(mappedList)
+    res.json(mappedList);
   })
   .get('/all', async (req, res, next) => {
     const bookings = await Booking.find().exec();

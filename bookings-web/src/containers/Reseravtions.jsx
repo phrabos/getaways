@@ -15,7 +15,6 @@ const Reservations = () => {
   }, []);
 
   const handleCancel = async (e) => {
-    console.log(e.currentTarget.value);
     const confirm = await cancelReservation(e.currentTarget.value);
     setLoading(true);
     getReservations()
