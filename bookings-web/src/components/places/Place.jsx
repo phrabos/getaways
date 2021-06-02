@@ -14,7 +14,7 @@ import { addToFavorites } from '../../services/placesApi';
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: 450,
+    maxWidth: 425,
     margin: '2px',
     textDecoration: 'none',
     display: 'flex',

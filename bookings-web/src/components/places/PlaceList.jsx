@@ -12,6 +12,7 @@ const PlaceList = ({ places, page, handleFavoriteUpdate }) => {
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+
     }}>
       {placesPaged.map((place) => {
         return (
